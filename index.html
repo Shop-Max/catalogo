@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Casas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f8fb;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #004080, #0066cc);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .filters button {
+      padding: 0.7rem 1.5rem;
+      background: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.3s;
+    }
+    .filters button:hover {
+      transform: scale(1.05);
+      background: #004c99;
+    }
+    .municipios, .casas {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+    }
+    .casa {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      padding: 1rem;
+      width: 300px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      height: 200px;
+    }
+    .carousel img {
+      display: none;
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .carousel img.active {
+      display: block;
+    }
+    .carousel-controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 0.5rem;
+    }
+    .carousel-controls span {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .contactar {
+      display: block;
+      text-align: center;
+      background: #25D366;
+      color: white;
+      padding: 0.7rem;
+      margin-top: 1rem;
+      border-radius: 25px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .contactar:hover {
+      background: #1ebd5d;
+    }
+    .quienes-somos {
+      background: #e0f0ff;
+      padding: 2rem 1rem;
+      text-align: center;
+      border-top: 2px solid #ccc;
+    }
+    .quienes-somos img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 3px solid #004080;
+    }
+    .redes a {
+      margin: 0 0.5rem;
+      text-decoration: none;
+      font-size: 1.6rem;
+      color: #004080;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-in-out;
+    }
+    .scroll-animate.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Catálogo de Casas</h1>
+  </header>
+
+  <section class="filters">
+    <button onclick="mostrarMunicipios('provincia1')">La Habana</button>
+    <button onclick="mostrarMunicipios('provincia2')">Matanzas</button>
+  </section>
+
+  <section id="provincia1" class="municipios">
+    <button onclick="mostrarCasas('municipio1')">Playa</button>
+    <button onclick="mostrarCasas('municipio2')">Centro Habana</button>
+    <button onclick="mostrarCasas('municipio3')">La Lisa</button>
+    <button onclick="mostrarCasas('municipio4')">Cerro</button>
+    <button onclick="mostrarCasas('municipio5')">10 de Octubre</button>
+    <button onclick="mostrarCasas('municipio6')">Vedado</button>
+    <button onclick="mostrarCasas('municipio7')">Boyero</button>
+    <button onclick="mostrarCasas('municipio8')">Marianao</button>
+    <button onclick="mostrarCasas('municipio9')">San Miguel del Padrón</button>
+    <button onclick="mostrarCasas('municipio10')">Cotorro</button>
+    <button onclick="mostrarCasas('municipio11')">Miramar</button>
+    <button onclick="mostrarCasas('municipio12')">La Habana Vieja</button>
+    
+  </section>
+
+  <section id="provincia2" class="municipios">
+    <button onclick="mostrarCasas('municipio6')"></button>
+  </section>
+
+  <section id="municipio4" class="casas">
+    <!-- Casa existente -->
+    <!-- Nueva casa -->
+    <div class="casa scroll-animate">
+      <div class="carousel">
+        <img src="Construcción capitalista.jpg" class="active">
+        <div class="carousel-controls">
+          <span onclick="moverCarrusel(this, -1)">&#10094;</span>
+          <span onclick="moverCarrusel(this, 1)">&#10095;</span>
+        </div>
+      </div>
+      <h3>Construcción capitalista</h3>
+      <p><strong>Dirección:</strong> San Salvador entre Arzobispo y Cepero. Canal</p>
+      <p><strong>Características:</strong> Vendo casa o cambio por carro en buen estado y dinero por arriba. Es de placa libre en el Cerro de 22 metros de largo x 6 metros de ancho. Consta de 4 cuartos, sala saleta, holl, baño, cocina comedor, patio a lo largo de toda casa, lavadero techado, tiene cisterna de 1 tonelada más tanque elevado, es bien céntrica, está cerca de los hospitales Covadonga, Pediátrico del Cerro, Jurídico, del parque de Galicia, tiene gas y agua de la calle, 110 y 220, teléfono fijo !!! Necesita arreglos y no es de viga y losa!!! Papeles en regla. Zona que no se va la electricidad</p>
+      <p><strong>Precio Anterior:</strong> $19,000 USD</p>
+      <p><strong>Precio Actual:</strong> $17,000 USD</p>
+      <p><strong>Teléfono:</strong> +5350126533 Llamar antes de ir</p>
+      <a class="contactar" href="https://wa.me/5350126533?text=Me%20interesa%20la%20casa%20Ave%2031%20%231503" target="_blank">Contactar</a>
+    </div>
+    <div class="casa scroll-animate">
+      <div class="carousel">
+        <img src="1.jpg" class="active">
+        <img src="2.jpg">
+        <img src="3.jpg">
+        <img src="4.jpg">
+        <img src="5.jpg">
+        <img src="6.jpg">
+        <img src="7.jpg">
+        <img src="8.jpg">
+        <img src="9.jpg">        
+        <div class="carousel-controls">
+          <span onclick="moverCarrusel(this, -1)">&#10094;</span>
+          <span onclick="moverCarrusel(this, 1)">&#10095;</span>
+        </div>
+      </div>
+      <h3>Construccion capitalista (bajos)</h3>
+      <p><strong>Dirección:</strong> Cepero entre San Salvador y Santo Tomás. Canal</p>
+      <p><strong>Características:</strong> Apartamento en bajos puerta de calle. Cuenta con sala, comedor, holl pequeño, cocina pequeña, patio techado con lavadero, 2 cuartos con closet (1 con marquetería de madera), baño y pasillo lateral enrejado. Teléfono fijo, gas y agua de la calle, 110 y 220 vol., 3 tanques elevados de 55 galones. Zona que no se va la electricidad. Es bien céntrica, está cerca de los hospitales Covadonga, Pediátrico del Cerro, Jurídico, del parque de Galicia. Zona que no se va la electricidad</p>
+      <p><strong>Precio Anterior:</strong> $11,000 USD</p>
+      <p><strong>Precio Actual:</strong> $10,000 USD</p>
+      <p><strong>Teléfono:</strong> +5352666216</p>
+      <a class="contactar" href="https://wa.me/5352666216?text=Me%20interesa%20la%20casa%20Ave%2031%20%231503" target="_blank">Contactar</a>
+    </div>
+  </section>
+
+  <section id="municipio8" class="casas">
+    <div class="casa scroll-animate">
+      <div class="carousel">
+        <img src="casa interior Marianao.jpg" class="active">
+        <img src="casa interior Marianao1.jpg" class="active">
+        <img src="casa interior Marianao2.jpg" class="active">
+        <div class="carousel-controls">
+          <span onclick="moverCarrusel(this, -1)">&#10094;</span>
+          <span onclick="moverCarrusel(this, 1)">&#10095;</span>
+        </div>
+      </div>
+      <h3>Casa en interior</h3>
+      <p><strong>Dirección:</strong> Marianao </p>
+      <p><strong>Características:</strong> CASA EN INTERIOR (10 APARTAMENTOS EN EL MISMO PASILLO),TIENE 2 CUARTOS,BAÑO,COCINA, COMEDOR,PATIO Y ES PLACA LIBRE,SE DEJA TELEFONO FIJO Y UN SOFA-CAMA,ES EN PASILLO!!!</p>
+      <p><strong>Precio Actual:</strong> $6,500 USD</p>
+      <p><strong>Teléfono:</strong> +5353013906</p>
+      <a class="contactar" href="https://wa.me/5353013906?text=Me%20interesa%20la%20casa%20Ave%2031%20%231503" target="_blank">Contactar</a>
+    </div>
+    <!-- Casa existente -->
+  </section>
+  
+  <section id="municipio" class="casas">
+    <!-- Casa existente -->
+    <!-- Nueva casa -->
+    <div class="casa scroll-animate">
+      <div class="carousel">
+        <img src="https://via.placeholder.com/300x200?text=Casa+5-1" class="active">
+        <img src="https://via.placeholder.com/300x200?text=Casa+5-2">
+        <div class="carousel-controls">
+          <span onclick="moverCarrusel(this, -1)">&#10094;</span>
+          <span onclick="moverCarrusel(this, 1)">&#10095;</span>
+        </div>
+      </div>
+      <h3></h3>
+      <p><strong>Dirección:</strong> </p>
+      <p><strong>Características:</strong> </p>
+      <p><strong>Precio Anterior:</strong> $180,000 USD</p>
+      <p><strong>Precio Actual:</strong> -$15,000</p>
+      <p><strong>Teléfono:</strong> +5353344556</p>
+      <a class="contactar" href="https://wa.me/5353344556?text=Me%20interesa%20la%20casa%20Calle%20Cuba%20%2345" target="_blank">Contactar</a>
+    </div>
+  </section>
+
+  <section id="municipio" class="casas">
+    <!-- Casa existente -->
+    <!-- Nueva casa -->
+    <div class="casa scroll-animate">
+      <div class="carousel">
+        <img src="https://via.placeholder.com/300x200?text=Casa+5-1" class="active">
+        <img src="https://via.placeholder.com/300x200?text=Casa+5-2">
+        <div class="carousel-controls">
+          <span onclick="moverCarrusel(this, -1)">&#10094;</span>
+          <span onclick="moverCarrusel(this, 1)">&#10095;</span>
+        </div>
+      </div>
+      <h3>Casa Colonial en Sueño</h3>
+      <p><strong>Dirección:</strong> </p>
+      <p><strong>Características:</strong> </p>
+      <p><strong>Precio Anterior:</strong> $180,000 USD</p>
+      <p><strong>Precio Actual:</strong> -$15,000</p>
+      <p><strong>Teléfono:</strong> +5353344556</p>
+      <a class="contactar" href="https://wa.me/5353344556?text=Me%20interesa%20la%20casa%20Calle%20Cuba%20%2345" target="_blank">Contactar</a>
+    </div>
+  </section>
+
+  <section id="quienes" class="quienes-somos">
+    <img src="perfil.jpg" alt="Foto del agente" />
+    <p><strong>Viviendas que Enamoran</strong><br />Profesional que comercializa propiedades, asesora compradores y gestiona transacciones inmobiliarias.</p>
+    <p>No dudes en contactar con nosotros para vender tu casa</p>
+    <div class="redes">
+      <a href="https://www.facebook.com/panchomedina1002"><i class="fab fa-facebook-square"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="https://wa.me/5363995809" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <a class="contactar" href="https://wa.me/5363995809" target="_blank">Contactar Directo</a>
+  </section>
+
+  <script>
+    function mostrarMunicipios(id) {
+      document.querySelectorAll('.municipios').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'flex';
+      document.querySelectorAll('.casas').forEach(el => el.style.display = 'none');
+    }
+
+    function mostrarCasas(id) {
+      document.querySelectorAll('.casas').forEach(el => el.style.display = 'none');
+      const target = document.getElementById(id);
+      target.style.display = 'flex';
+      document.getElementById('quienes').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function moverCarrusel(el, dir) {
+      const carousel = el.closest('.carousel');
+      const images = carousel.querySelectorAll('img');
+      let current = Array.from(images).findIndex(img => img.classList.contains('active'));
+      images[current].classList.remove('active');
+      let next = (current + dir + images.length) % images.length;
+      images[next].classList.add('active');
+    }
+
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.scroll-animate').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
